@@ -36,6 +36,43 @@
 ./run_bfshell.sh -b ./my_simple_l2_setup.py -i 
 ```
 
+- 如果出现以下错误信息：
+```
+error opening /dev/bf0
+ERROR: Device mmap failed for dev_id 0
+please load driver with bf_kdrv_mod_load script. Exiting...
+```
+执行以下命令：
+```
+$SDE/install/bin/bf_kdrv_mod_load $SDE_INSTALL
+# SDE=/root/bf-sde-9.2.0
+# SDE_INSTALL=/root/bf-sde-9.2.0/install
+```
+
+- bfshell简单使用, 配置端口，使能端口，查看端口状态
+```
+bfshell> ucli
+pm
+# 添加端口 port-add <port_nanme> <speed> <mode> 
+port-add -/- 10G none
+port-add 10/- 10G none
+# 使能端口
+port-enb -/-
+port-enb 10/-
+# 查看已使能端口信息
+show
+# 查看所有端口状态
+show -a
+```
+- bfshell 查看流表
+```
+bfshell> bfrt_python
+bfrt_python> bfrt
+bfrt> my_simple_l2
+bfrt.port> pipe
+bfrt.port.pipe> ingress
+```
+
 ## 贡献
 
 PRs accepted.
